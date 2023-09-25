@@ -1,4 +1,4 @@
-const calculateBmi = (heightInCm: number, weightInKg: number): string => {
+export const calculateBmi = (heightInCm: number, weightInKg: number): string => {
 	const heightInM = heightInCm / 100; // Convert height to meters
 	const BMI = weightInKg / (heightInM * heightInM);
 
@@ -12,7 +12,3 @@ const calculateBmi = (heightInCm: number, weightInKg: number): string => {
 		return 'Obese';
 	}
 }
-
-const heightInCm: number = Number(process.argv[2]);
-const weightInKg: number = Number(process.argv[3])
-console.log(calculateBmi(heightInCm, weightInKg))
