@@ -55,6 +55,7 @@ Here's a brief summary of the differences:
 In your specific use case, you are calculating BMI, which can be done using query parameters because you only need a couple of numeric values (height and weight) to perform the calculation, and these values are relatively small and can be easily included in the URL. If you were dealing with more complex data or data that shouldn't be exposed in the URL, you might use `req.body` and a different HTTP method like POST.
 
 for sending a POST request to endpoint http://localhost:3003/exercises, use this command in terminal:
+
 **curl -X POST -H "Content-Type: application/json" -d '{
   "daily_exercises": [1, 0, 2, 0, 3, 0, 2.5],
   "target": 2.5
