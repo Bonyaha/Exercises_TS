@@ -25,6 +25,38 @@ So, make sure to have `@types/node` installed in your project when using `ts-nod
 
 **Q**:If the version of npm is at least 7.0, the peer dependencies of a project are automatically installed by npm.
 So it means that when I install ts-node, it will works fine, because npm already install @types/node package before, or does it mean that when I install ts-node, npm also install @types/node package together with ts-node?
+
 **A**: As of npm version 7.0 and later, npm does indeed automatically handle the installation of peer dependencies by default. So, if you have npm 7.0 or a higher version, when you install `ts-node`, npm will also install `@types/node` (if it's specified as a peer dependency) alongside `ts-node`.
 
 This means that when you install `ts-node` using npm 7.0+, you don't need to worry about separately installing `@types/node`. npm will take care of it, ensuring that `ts-node` has its peer dependencies satisfied for correct operation.
+
+**Q**: why do we use req.query and not req.body? Explain the difference, please (it was asked about /bmi endpoint)
+
+**A**: In your Express application, you are using `req.query` to access data sent to the server via query parameters in the URL. This is commonly used for GET requests when you want to pass data to the server as part of the URL.
+
+`req.query` is used for accessing query parameters, which are typically included in the URL after the question mark (`?`) and are key-value pairs separated by ampersands (`&`). For example, in the URL `http://localhost:3002/bmi?height=180&weight=72`, the `height` and `weight` are query parameters, and you can access them using `req.query.height` and `req.query.weight`.
+
+On the other hand, `req.body` is used for accessing data sent to the server in the request body. This is commonly used for HTTP methods like POST or PUT, where you want to send a larger amount of data, such as form data, JSON payloads, or file uploads, to the server. The data sent in the request body is typically in a different format, such as JSON or form-urlencoded data, and is often used when you need to create or update resources on the server.
+
+Here's a brief summary of the differences:
+
+1. `req.query`:
+   - Used for accessing query parameters in the URL.
+   - Typically used for GET requests.
+   - Query parameters are visible in the URL.
+   - Suitable for passing small amounts of data, often for filtering or specifying details of a request.
+
+2. `req.body`:
+   - Used for accessing data sent in the request body.
+   - Commonly used for HTTP methods like POST and PUT.
+   - Data in the request body is not visible in the URL.
+   - Suitable for sending larger amounts of data, such as form submissions, JSON payloads, or file uploads.
+
+In your specific use case, you are calculating BMI, which can be done using query parameters because you only need a couple of numeric values (height and weight) to perform the calculation, and these values are relatively small and can be easily included in the URL. If you were dealing with more complex data or data that shouldn't be exposed in the URL, you might use `req.body` and a different HTTP method like POST.
+
+**for sending a POST request to endpoint http://localhost:3003/exercises, use this command in terminal:
+curl -X POST -H "Content-Type: application/json" -d '{
+  "daily_exercises": [1, 0, 2, 0, 3, 0, 2.5],
+  "target": 2.5
+}' http://localhost:3003/exercises
+**

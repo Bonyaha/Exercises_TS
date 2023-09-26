@@ -12,3 +12,41 @@ export const calculateBmi = (heightInCm: number, weightInKg: number): string => 
 		return 'Obese';
 	}
 }
+
+interface Inputs {
+	heightInCm: number;
+	weightInKg: number;
+}
+const parseArguments = (args: string[]): Inputs => {
+	//console.log(args.length);
+
+	if (args.length < 4) throw new Error('Not enough arguments');
+	//if (args.length > 12) throw new Error('Too many arguments');
+
+	const heightInCm: number = Number(process.argv[2]);
+	const weightInKg: number = Number(process.argv[3]);
+
+	if (isNaN(heightInCm) || heightInCm <= 0) {
+		throw new Error('Invalid height provided. Please provide non-negative number.');
+	}
+	if (isNaN(weightInKg) || weightInKg <= 0) {
+		throw new Error('Invalid weight value. Please provide a positive number.');
+	}
+
+	return {
+		heightInCm,
+		weightInKg
+	};
+}
+
+console.log(calculateBmi(180, 74))
+try {
+	const { heightInCm, weightInKg } = parseArguments(process.argv);
+	console.log(calculateBmi(heightInCm, weightInKg))
+} catch (error: unknown) {
+	let errorMessage = 'Something bad happened.'
+	if (error instanceof Error) {
+		errorMessage += ' Error: ' + error.message;
+	}
+	console.log(errorMessage);
+}

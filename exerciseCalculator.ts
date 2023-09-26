@@ -13,7 +13,7 @@ interface Inputs {
 	target: number;
 }
 const parseArguments = (args: string[]): Inputs => {
-	console.log(args.length);
+	//console.log(args.length);
 
 	if (args.length < 4) throw new Error('Not enough arguments');
 	if (args.length > 12) throw new Error('Too many arguments');
@@ -35,7 +35,7 @@ const parseArguments = (args: string[]): Inputs => {
 }
 
 
-const calculateExercises = (hoursPerDay: number[], target: number): ExerciseResult => {
+export const calculateExercises = (hoursPerDay: number[], target: number): ExerciseResult => {
 
 	const periodLength = hoursPerDay.length;
 	const trainingDays = hoursPerDay.filter((hours) => hours > 0).length;
@@ -63,6 +63,8 @@ const calculateExercises = (hoursPerDay: number[], target: number): ExerciseResu
 		average,
 	};
 }
+
+console.log(calculateExercises([3, 0, 2, 4.5, 0, 3, 1], 2));
 
 
 try {
