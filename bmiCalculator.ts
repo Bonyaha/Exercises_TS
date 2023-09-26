@@ -1,3 +1,5 @@
+import { validateInputs, Inputs } from './inputValidation';
+
 export const calculateBmi = (heightInCm: number, weightInKg: number): string => {
 	const heightInM = heightInCm / 100; // Convert height to meters
 	const BMI = weightInKg / (heightInM * heightInM);
@@ -13,37 +15,16 @@ export const calculateBmi = (heightInCm: number, weightInKg: number): string => 
 	}
 }
 
-interface Inputs {
-	heightInCm: number;
-	weightInKg: number;
-}
-const parseArguments = (args: string[]): Inputs => {
-	//console.log(args.length);
-
-	if (args.length < 4) throw new Error('Not enough arguments');
-
-	const heightInCm: number = Number(process.argv[2]);
-	const weightInKg: number = Number(process.argv[3]);
-
-	if (isNaN(heightInCm) || heightInCm <= 0) {
-		throw new Error('Invalid height provided. Please provide non-negative number.');
-	}
-	if (isNaN(weightInKg) || weightInKg <= 0) {
-		throw new Error('Invalid weight value. Please provide a positive number.');
-	}
-
-	return {
-		heightInCm,
-		weightInKg
-	};
-}
 
 console.log(calculateBmi(180, 74))
+
 try {
-	const { heightInCm, weightInKg } = parseArguments(process.argv);
-	console.log(calculateBmi(heightInCm, weightInKg))
+	const inputs: Inputs = validateInputs(process.argv, 2, 4);
+	const heightInCm = inputs.heightInCm || 0; // Provide a default value (0 in this case) if it's undefined
+	const weightInKg = inputs.weightInKg || 0;
+	console.log(calculateBmi(heightInCm, weightInKg));
 } catch (error: unknown) {
-	let errorMessage = 'Something bad happened.'
+	let errorMessage = 'Something bad happened.';
 	if (error instanceof Error) {
 		errorMessage += ' Error: ' + error.message;
 	}
