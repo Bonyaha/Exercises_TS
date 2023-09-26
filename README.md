@@ -58,5 +58,4 @@ In your specific use case, you are calculating BMI, which can be done using quer
 curl -X POST -H "Content-Type: application/json" -d '{
   "daily_exercises": [1, 0, 2, 0, 3, 0, 2.5],
   "target": 2.5
-}' http://localhost:3003/exercises
-**
+}' http://localhost:3003/exercises**
