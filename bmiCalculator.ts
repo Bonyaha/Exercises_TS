@@ -21,7 +21,6 @@ const parseArguments = (args: string[]): Inputs => {
 	//console.log(args.length);
 
 	if (args.length < 4) throw new Error('Not enough arguments');
-	//if (args.length > 12) throw new Error('Too many arguments');
 
 	const heightInCm: number = Number(process.argv[2]);
 	const weightInKg: number = Number(process.argv[3]);
