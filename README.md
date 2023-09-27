@@ -1,3 +1,6 @@
+*In this and following projects is used ts-node-dev instead of nodemon. It takes care of recompilation on every change, so restarting the application won't be necessary.*
+
+
 Since version 10.0 ts-node has defined @types/node as a peer dependency. If the version of npm is at least 7.0, the peer dependencies of a project are automatically installed by npm. If you have an older npm, the peer dependency must be installed explicitly:
 npm install --save-dev @types/node
 **Q**: what is peer dependancy in npm context? Explain to me in simplest form, please
